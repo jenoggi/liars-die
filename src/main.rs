@@ -375,11 +375,13 @@ fn calc_move(player: PlayerInfo, dies_left: u8, players_left: usize, current_gue
 	//need to call it
 	if endgame {
 		let call_it_even = rng.gen_range(0..=1);
-		if call_it_even>0 && current_guess.cnt <= (dies_left>>1) + (dies_left%2) {
+		if (   call_it_even>0 && current_guess.cnt <= (other_dies_left>>1) + (other_dies_left%2) + player.dies[(current_guess.val-1)as usize].cnt)
+		    || (player.dies[(current_guess.val-1)as usize].cnt==current_guess.cnt) {
 			return Move::Exact();
 		}
 	} else {
-		if (player.dies[(current_guess.val-1) as usize].cnt+min_guess == current_guess.cnt) && ((mod_dies_left == 0) || (mod_dies_left == 1) || (mod_dies_left == 5)) {
+		if (   player.dies[(current_guess.val-1) as usize].cnt+min_guess == current_guess.cnt)
+			&& ((mod_dies_left == 0) || (mod_dies_left == 1) || (mod_dies_left == 5)) {
 			return Move::Exact();
 		}
 	}
