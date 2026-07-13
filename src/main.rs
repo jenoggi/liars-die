@@ -107,7 +107,7 @@ fn read_input_number() -> usize {
 	}
 }
 
-fn calculate_result(players: &Vec<PlayerInfo>, val: u8) -> u8 {
+fn calculate_result(players: &[PlayerInfo], val: u8) -> u8 {
 	let mut r = 0;
 	for p in 0..players.len() {
 		for d in 0..6 {
@@ -119,7 +119,7 @@ fn calculate_result(players: &Vec<PlayerInfo>, val: u8) -> u8 {
 	r
 }
 
-fn get_last_player(players: &Vec<PlayerInfo>, current_player: usize) -> usize {
+fn get_last_player(players: &[PlayerInfo], current_player: usize) -> usize {
 	let mut r=current_player;
 	let mut found = false;
 	while !found {
@@ -155,7 +155,7 @@ fn read_agreement(message: &str) -> Agreement {
 	}
 }
 
-fn player_lost(players: &mut Vec<PlayerInfo>, looser: usize, players_left: &mut usize) -> Agreement {
+fn player_lost(players: &mut [PlayerInfo], looser: usize, players_left: &mut usize) -> Agreement {
 	players[looser].dies_left -= 1;
 	if players[looser].dies_left == 0 {
 		*players_left -= 1;
