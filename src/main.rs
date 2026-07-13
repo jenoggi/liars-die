@@ -201,6 +201,7 @@ fn print_win() {
 	println!("|   ☻   ||  ☻☻☻  ||  ☻☻☻  ||  ☻ ☻  ||  ☻☻☻  || ☻   ☻ |");
 	println!("|       ||       ||       ||       ||       ||       |");
 	println!("└-------┘└-------┘└-------┘└-------┘└-------┘└-------┘");
+	println!("Congratulations!");
 }
 
 fn print_dies(player: PlayerInfo) {
@@ -375,8 +376,8 @@ fn calc_move(player: PlayerInfo, dies_left: u8, players_left: usize, current_gue
 	//need to call it
 	if endgame {
 		let call_it_even = rng.gen_range(0..=1);
-		if (   call_it_even>0 && current_guess.cnt <= (other_dies_left>>1) + (other_dies_left%2) + player.dies[(current_guess.val-1)as usize].cnt)
-		    || (player.dies[(current_guess.val-1)as usize].cnt==current_guess.cnt) {
+		if    (call_it_even>0 && current_guess.cnt <= (other_dies_left>>1) + (other_dies_left%2) + player.dies[(current_guess.val-1)as usize].cnt)
+		   || (player.dies[(current_guess.val-1)as usize].cnt==current_guess.cnt) {
 			return Move::Exact();
 		}
 	} else {
@@ -643,7 +644,6 @@ fn main() {
 				if players[p].dies_left>0 {
 					if players[p].is_human {
 						print_win();
-						println!("Congratulations");
 					} else {
 						println!("{} won!",NPCNAMES[players[p].name]);
 					}
