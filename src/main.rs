@@ -405,15 +405,15 @@ fn main() {
 		let player_start_pos =  rng.gen_range(0..player_count);
 		//println!("start-pos: {player_start_pos}");
 		let mut players = vec![PlayerInfo::default(); player_count];
-		for p in 0..player_count {
-			players[p].dies_left = starting_dies as u8;
+		for player in &mut players {
+			player.dies_left = starting_dies as u8;
 			// Yeah, I know, not the most elegant solution
-			players[p].dies[0].val = 1;
-			players[p].dies[1].val = 2;
-			players[p].dies[2].val = 3;
-			players[p].dies[3].val = 4;
-			players[p].dies[4].val = 5;
-			players[p].dies[5].val = 6;
+			player.dies[0].val = 1;
+			player.dies[1].val = 2;
+			player.dies[2].val = 3;
+			player.dies[3].val = 4;
+			player.dies[4].val = 5;
+			player.dies[5].val = 6;
 		}
 		players[player_start_pos].is_human = true;
 		for p in 1..player_count {
